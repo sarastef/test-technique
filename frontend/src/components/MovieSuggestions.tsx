@@ -1,10 +1,10 @@
-import { fetchData } from "@/utils/fetch";
+import { getData } from "@/utils/fetch";
 import { Response } from "@/utils/types";
 import Link from "next/link";
 import Image from "next/image";
 
 export const MoviesSuggestion = async ({ id }: { id: number }) => {
-  const data = (await fetchData(`${id}/recommendations`)) as Response;
+  const data = (await getData(`${id}/recommendations`)) as Response;
   const movies = data.results;
 
   return (
@@ -18,12 +18,15 @@ export const MoviesSuggestion = async ({ id }: { id: number }) => {
                 href={`/movie/${movie.id}`}
                 className="flex flex-col items-center border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl"
               >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                  alt={movie.title}
-                  width={200}
-                  height={300}
-                />
+                {movie?.poster_path && (
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    width={200}
+                    height={300}
+                  />
+                )}
+
                 <h2>{movie.title}</h2>
                 <p>{movie.overview}</p>
               </Link>
