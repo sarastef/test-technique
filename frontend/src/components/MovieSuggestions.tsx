@@ -1,10 +1,10 @@
-import { getData } from "@/utils/fetch";
+import { fetchData } from "@/utils/fetch";
 import { Response } from "@/utils/types";
 import Link from "next/link";
 import Image from "next/image";
 
 export const MoviesSuggestion = async ({ id }: { id: number }) => {
-  const data = (await getData(`${id}/recommendations`)) as Response;
+  const data = (await fetchData(`movie/${id}/recommendations`)) as Response;
   const movies = data.results;
 
   return (

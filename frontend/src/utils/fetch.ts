@@ -1,19 +1,9 @@
 const api_key = "ad2c28e0345278f3c8b002efddadf28f";
 export const fetchData = async (route: string, sortBy?: string) => {
-  const url = `https://api.themoviedb.org/3/${route}/movie?api_key=${api_key}${
-    sortBy ? `&sort_by=${sortBy}` : ""
-  }}`;
-
+  const sort_by = sortBy ? `&sort_by=${sortBy}` : "";
+  const url = `https://api.themoviedb.org/3/${route}?page=1${sort_by}&api_key=${api_key}`;
   const res = await fetch(url);
   const data = await res.json();
-  return data;
-};
-export const getData = async (route: string) => {
-  const url = `https://api.themoviedb.org/3/movie/${route}?api_key=${api_key}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  console.log(url, data);
-
   return data;
 };
 

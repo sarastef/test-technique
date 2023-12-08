@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { getData } from "@/utils/fetch";
+import { fetchData } from "@/utils/fetch";
 import { Movie } from "@/utils/types";
 
 export const MovieDetails = async ({ id }: { id: number }) => {
-  const movie = (await getData(`${id}`)) as Movie;
+  const movie = (await fetchData(`movie/${id}`)) as Movie;
   return (
     <div className="flex min-h-screen flex-col items-center justify-between p-24">
       {movie && (

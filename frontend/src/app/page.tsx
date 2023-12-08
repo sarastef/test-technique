@@ -2,11 +2,14 @@ import { fetchData } from "@/utils/fetch";
 import { Response } from "@/utils/types";
 import Image from "next/image";
 import Link from "next/link";
-export default async function Home(props: { sorted: string }) {
-  console.log(props);
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { sorted: string };
+}) {
   const data = (await fetchData(
-    "upcoming",
-    "primary_release_date.desc"
+    "discover/movie",
+    searchParams.sorted
   )) as Response;
   const { results: movies } = data;
   return (
